@@ -1,0 +1,4 @@
+192.168.111.100 caasp-controller.caasp.local caasp-controller
+192.168.111.200 caasp-master.caasp.local caasp-master
+192.168.111.201 caasp-worker-1.caasp.local caasp-worker-1
+192.168.111.202 caasp-worker-2.caasp.local caasp-worker-2
