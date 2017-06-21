@@ -24,6 +24,19 @@
         ]]>
         </source>
       </script>
+      <script>
+        <chrooted config:type="boolean">true</chrooted>
+        <filename>set_authorized_keys.sh</filename>
+        <interpreter>shell</interpreter>
+        <source><![CDATA[
+        #!/bin/sh
+        mkdir -p /root/.ssh
+        chmod 600 /root/.ssh
+        echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDxese3jHKYY6ii8Q1ODHeiduPctVMAEsl2Dn5Rhl2UqYZXtnKnuh37piMsHWxMvA69EG+rKqMG8dfswaZMx1MdY7OFjtLBCr3gxW8J2SPHmgVn4HPADgIFcBvJ/cBucbh27Rj0OmKoa9DdihWSpDDS06IWFWtAbJsNSHbj8DgtOGpLqM/mGYxN5B/NanbmdQPO2yHuvLjAPfyWYvKBvpCRf3XrOTnBgSaDE7vwadv4rDcPdVfS07eApmo5w/BFFUCC4JPFY4/gkDAyUqraRSuRrk3ekMaJ7Xeh/5kPadGEbmgMRVbg/LP0yLE2uK+wQbGcC0hIp8m7rS1pdbUHDk9bGtay14nSuQ1BQwlf5PyPylibbUYI8CiWXNcMeX6cyaUXHWrJUgxAAXhimbqoigD7x5YqwYon0yrfRevn/pG89l3ndvWFCEuRK0257gUVfOiYEeTvuM6YOIR0SQWwRETOQjUnjwsPreQLwYrtEdghFpVG1zWBz8xaoJ0xHUsdS6ZQdbUvp9JjZrdL8CoWvPQzEfWv/SKUj+3cUmD4NuJsfLRJ5VRTjXABXi7B6Ytu1sMfMzM9J+6c8kxOQsZ/S+GLWlYMGcN5YmmZXB4VGYSYO0vIVvY5D/XtQ1ke/DuDXnNy9JjT9kCxRO/gKeey4SzZKZ7D6xM5L4mdFeaGa06bww== root@caasp-controller
+" > /root/.ssh/authorized_keys
+        ]]>
+        </source>
+      </script>
     </chroot-scripts>
   </scripts>
   <bootloader>
@@ -50,9 +63,24 @@
       <start_multipath config:type="boolean">false</start_multipath>
     </storage>
   </general>
-   <partitioning config:type="list">
+  <partitioning config:type="list">
     <drive>
       <use>all</use>
+      <partitions config:type="list">
+        <partition>
+          <mount>/</mount>
+          <size>30gb</size>
+        </partition>
+        <partition>
+          <mount>swap</mount>
+          <size>auto</size>
+        </partition>
+        <partition>
+          <filesystem config:type="symbol">btrfs</filesystem>
+          <mount>/var/lib/docker</mount>
+          <size>max</size>
+        </partition>
+      </partitions>
     </drive>
   </partitioning>
   <ssh_import>
@@ -78,7 +106,7 @@
     <dns>
       <dhcp_hostname config:type="boolean">true</dhcp_hostname>
       <domain>caasp.local</domain>
-      <hostname>caasp-worker-2</hostname>
+      <hostname>caasp-worker-1</hostname>
       <resolv_conf_policy>auto</resolv_conf_policy>
       <write_hostname config:type="boolean">false</write_hostname>
     </dns>
@@ -95,7 +123,7 @@
         <bootproto>static</bootproto>
         <device>eth0</device>
         <firewall>no</firewall>
-        <ipaddr>192.168.111.202</ipaddr>
+        <ipaddr>192.168.111.201</ipaddr>
         <netmask>255.255.255.0</netmask>
         <startmode>auto</startmode>
       </interface>
@@ -136,10 +164,10 @@
       <package>bash-completion</package>
     </packages>
     <patterns config:type="list">
-      <pattern>MicroOS</pattern>
+      <pattern>SUSE-MicroOS</pattern>
     </patterns>
     <patterns config:type="list">
-      <pattern>Stack</pattern>
+      <pattern>SUSE-CaaSP-Stack</pattern>
     </patterns>
   </software>
   <services-manager>
@@ -158,6 +186,8 @@
         <service>issue-add-ssh-keys</service>
         <service>salt-minion</service>
         <service>systemd-timesyncd</service>
+        <service>docker</service>
+        <service>container-feeder</service>
       </enable>
     </services>
   </services-manager>

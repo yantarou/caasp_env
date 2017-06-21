@@ -1,4 +1,4 @@
-INSTALL_IMG="SUSE-CaaS-Platform-1.0-DVD-x86_64-Beta3-DVD1.iso"
+INSTALL_IMG="SUSE-CaaS-Platform-1.0-DVD-x86_64-RC1-DVD1.iso"
 OS_VARIANT="caasp"
 BASE_NAME="caasp-controller"
 
