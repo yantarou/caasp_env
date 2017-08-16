@@ -32,7 +32,7 @@
         #!/bin/sh
         mkdir -p /root/.ssh
         chmod 600 /root/.ssh
-        echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDxese3jHKYY6ii8Q1ODHeiduPctVMAEsl2Dn5Rhl2UqYZXtnKnuh37piMsHWxMvA69EG+rKqMG8dfswaZMx1MdY7OFjtLBCr3gxW8J2SPHmgVn4HPADgIFcBvJ/cBucbh27Rj0OmKoa9DdihWSpDDS06IWFWtAbJsNSHbj8DgtOGpLqM/mGYxN5B/NanbmdQPO2yHuvLjAPfyWYvKBvpCRf3XrOTnBgSaDE7vwadv4rDcPdVfS07eApmo5w/BFFUCC4JPFY4/gkDAyUqraRSuRrk3ekMaJ7Xeh/5kPadGEbmgMRVbg/LP0yLE2uK+wQbGcC0hIp8m7rS1pdbUHDk9bGtay14nSuQ1BQwlf5PyPylibbUYI8CiWXNcMeX6cyaUXHWrJUgxAAXhimbqoigD7x5YqwYon0yrfRevn/pG89l3ndvWFCEuRK0257gUVfOiYEeTvuM6YOIR0SQWwRETOQjUnjwsPreQLwYrtEdghFpVG1zWBz8xaoJ0xHUsdS6ZQdbUvp9JjZrdL8CoWvPQzEfWv/SKUj+3cUmD4NuJsfLRJ5VRTjXABXi7B6Ytu1sMfMzM9J+6c8kxOQsZ/S+GLWlYMGcN5YmmZXB4VGYSYO0vIVvY5D/XtQ1ke/DuDXnNy9JjT9kCxRO/gKeey4SzZKZ7D6xM5L4mdFeaGa06bww== root@caasp-controller
+        echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDOXOF6rHi7CJefoXNjL4mjxT9XiROSdqHKzQiwZP5HJM7aZOi50kWmWeK4hlJRs0qEi/snlOHa+OAUd2KUcIhBK1ecFpxhJi93ST5r53NBhWirmfaLXUEvKfeJD4hrYLyblsNdIiqugZ0x+d8GWyEvR88Zk1KMECO4msV4SHVHnqCmib0WBoLYrgeg8WLugQgVq2eMkYV4kyUTT/uZth2Eqw3lkdCod8hGhOGrlys8M95Tc9Qpysqolw5Jf5xxrwFfEDRAXKQPobmcqycwBRqLU0tooZ6d2v8UEdi45JQeFN5daDNyujVQbPkKhDQEj39jPHaJH+6pHQ2Bou4nB5pZmBGrOjqIr20iuboWXEOPDQ0lPOkhoEpnygNWwBott+CU88PFy9MCPfyg1cc0CDU+iEOkEcjsEI8yFJPFHAnorz98YJB8eohkvqd9uAvTVPvDWVxyuia4Phmrhzjc4c1p91FmldtKyDleF6Ph2uqEYpVGX2SuNBCYFfwZEo3zaRsLsDB18OVsZutgGuJlzWHOSUs+Go+ActVZbPzbcPw9WaabFUmGFlzxadU+7Nyk0P/RkjWowSI7Sw7F0mw5vVEJUwMjqVH1hnn13EyPRO3BNdE7KYiyVwS7iGqPv2Px3DZ3fwGr/f8BYLmMY6PosYdlfWTZkITtx1MiZ5d/8FN1yw== root@caasp-controller
 " > /root/.ssh/authorized_keys
         ]]>
         </source>
@@ -109,6 +109,14 @@
       <hostname>caasp-master</hostname>
       <resolv_conf_policy>auto</resolv_conf_policy>
       <write_hostname config:type="boolean">false</write_hostname>
+      <nameservers config:type="list">
+        <nameserver>192.168.111.1</nameserver>
+        <nameserver>8.8.8.8</nameserver>
+        <nameserver>8.8.4.4</nameserver>
+      </nameservers>
+      <searchlist config:type="list">
+        <search>caasp.local</search>
+      </searchlist>
     </dns>
     <interfaces config:type="list">
       <!--

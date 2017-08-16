@@ -1,2 +1,2 @@
 export KUBECONFIG=kubeconfig
-
+kubectl "$@"
